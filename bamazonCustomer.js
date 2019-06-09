@@ -1,3 +1,4 @@
+// Dependencies
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 
@@ -20,14 +21,34 @@ var connection = mysql.createConnection({
 // connect to the mysql server and sql database
 connection.connect(function(err) {
   if (err) throw err;
-  // run the start function after the connection is made to prompt the user
-  startDisplay();
+  // run the startDisplay function after the connection
+  startBamazon();
 });
 
-function startDisplay() {
+function startBamazon() {
     connection.query("SELECT item_id, product_name, price FROM products", function(err, res) {
         if (err) throw err;
-        console.log(res);
-        
+        for (var i = 0; i < res.length; i++) {
+            console.log(res[i].item_id + " | " + res[i].product_name + " | " + "$" + res[i].price);
+            console.log("-----------------------------------");
+          };    
+          inquirer
+            .prompt([
+              {
+                name: "selectedProduct",
+                type: "input",
+                message: "Which item would you like to buy? (Enter the item_id)"
+              },
+              {
+              name: "selectedQuantity",
+              type: "input",
+              message: "What is the quantity would you like to buy?"   
+              }
+          ])
+          .then(function(answer) {
+              console.log(length + answer);
+          })
       });
 }
+
+
