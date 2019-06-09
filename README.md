@@ -1,2 +1,6 @@
 # Node.js-MySQL-Bamazon
-BAMAZON
+
+**Contributor**: `Bobby Nguyen`
+
+**Created on**: `June 7 2019`
+
