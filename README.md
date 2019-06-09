@@ -30,11 +30,11 @@ An Amazon-like CLI storefront built with mySQL, NODE.js and Inquirer NPM. The ap
 
     See screenshot:
 
-    ![Results](/screenshots/bamazonCustomerList)
+    ![Results](/screenshots/bamazonCustomerList.png)
 
     **Enter a item_id and quantity**:
         
-        - Ff the quantity demanded is more than the quantity supplied this response will be shown.
+        - If the quantity demanded is more than the quantity supplied this response will be shown.
 
     See screenshot:
 
