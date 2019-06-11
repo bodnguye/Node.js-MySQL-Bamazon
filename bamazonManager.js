@@ -15,18 +15,20 @@ const connection = mysql.createConnection({
   user: "root",
 
   // password
-  password: "Dai916Tran!",
-//   password: "Passw0rd",
+  password: "Passw0rd",
   database: "bamazon"
 });
 
 // connect to the mysql server and sql database
 connection.connect(function(err) {
   if (err) throw err;
-  // run the start function after the connection
+  // run the function after the connection
   runManagerView();
 });
 
+  /****************************/
+ /* runManagerView Function */
+/**************************/
 function runManagerView() {
 clear();
   inquirer
@@ -67,6 +69,10 @@ clear();
     });
 }
 
+  /************************/
+ /* viewProduct Function */
+/************************/
+// If a manager selects View Products for Sale, the app should list every available item: the item IDs, names, prices, and quantities.
 function viewProduct() {
     connection.query("SELECT * FROM products", function(err, inventory) {
         if (err) throw err;
@@ -84,6 +90,10 @@ function viewProduct() {
         mainMenuPrompt();
 };
 
+  /*************************/
+ /* lowInventory Function */
+/*************************/
+// If a manager selects View Low Inventory, then it should list all items with an inventory count lower than five.
 function lowInventory() {
     connection.query("SELECT * FROM products WHERE stock_quantity < 5", function(err, inventory) {
         if (err) throw err;
@@ -101,6 +111,10 @@ function lowInventory() {
         mainMenuPrompt();
 }
 
+  /*************************/
+ /* addInventory Function */
+/*************************/
+// If a manager selects Add to Inventory, your app should display a prompt that will let the manager "add more" of any item currently in the store.
 function addInventory() {
     connection.query("SELECT * FROM products", function(err, inventory) {
         if (err) throw err;
@@ -166,6 +180,70 @@ function addInventory() {
           })
 };
 
+  /***********************/
+ /* newProduct Function */
+/***********************/
+// If a manager selects Add New Product, it should allow the manager to add a completely new product to the store.
+function newProduct() {
+    inquirer
+        .prompt([
+              {
+                name: "product",
+                type: "input",
+                message: "Product Name: ",
+              },
+              {
+                name: "department",
+                type: "input",
+                message: "Department: ",
+              },
+              {
+                name: "price",
+                type: "input",
+                message: "Price: ",
+                validate: function(value) {
+                  if (isNaN(value) === false) {
+                    return true;
+                  }
+                    return false;
+                  }
+              },
+              {
+                name: "stock",
+                type: "input",
+                message: "Stock Quantity: ",
+                validate: function(value) {
+                  if (isNaN(value) === false) {
+                    return true;
+                  }
+                    return false;
+                  }
+              }
+          ])
+          .then(function(answer) {
+            console.log("Inserting a new product...\n");
+            let query = connection.query(
+            "INSERT INTO products SET ?",
+            {
+                product_name: answer.product,
+                department_name: answer.department,
+                price: answer.price,
+                stock_quantity: answer.stock
+            },
+            function(err, res) {
+                if (err) throw err;
+                    console.log(res.affectedRows + " product inserted!\n");
+                    }
+                );
+            // logs the actual query being run
+            console.log(query.sql);
+            mainMenuPrompt();
+            });
+}
+
+  /***************************/
+ /* mainMenuPrompt Function */
+/***************************/
 function mainMenuPrompt() {
   inquirer
     .prompt({
