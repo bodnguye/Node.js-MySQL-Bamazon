@@ -70,9 +70,34 @@ function runManagerView() {
 function viewProduct() {
     connection.query("SELECT * FROM products", function(err, inventory) {
         if (err) throw err;
+
+        let table = new Table({
+            head: ['Item ID', 'Product', 'Department', 'Price', 'Stock Quantity'],
+            colWidths: [10, 68, 16, 10, 16],
+        })
+
         for (let i = 0; i < inventory.length; i++) {
-            console.log(`${inventory[i].item_id} | ${inventory[i].product_name} | ${inventory[i].department_name} | $${inventory[i].price} | ${inventory[i].stock_quantity}`);
-            console.log("-----------------------------------");
+            table.push([ inventory[i].item_id, inventory[i].product_name, inventory[i].department_name, "$" + inventory[i].price, inventory[i].stock_quantity]);
           }
-    })
-};    
+            console.log(table.toString());
+                })
+};
+
+function mainMenuPrompt() {
+  inquirer
+    .prompt({
+      name: "mainMenu",
+      type: "list",
+      message: "Main menu or Exit?",
+      choices: ["Main Menu", "Exit"]
+      })
+      .then(function(answer) {
+      // based on their answer, either call the start() or connection.end()
+        if (answer.mainMenu === "Main Menu") {
+          runManagerView();
+        }
+        else {
+          connection.end();
+        }
+        });
+};
