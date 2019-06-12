@@ -1,9 +1,11 @@
 // Dependencies
-var mysql = require("mysql");
-var inquirer = require("inquirer");
+const mysql = require("mysql");
+const inquirer = require("inquirer");
+const Table = require('cli-table');
+const clear = require('clear');
 
 // create the connection information for the sql database
-var connection = mysql.createConnection({
+const connection = mysql.createConnection({
   host: "localhost",
 
   // Port
@@ -13,24 +15,33 @@ var connection = mysql.createConnection({
   user: "root",
 
   // password
-  password: "Passw0rd",
+  // password: "Passw0rd",
+  password: "Dai916Tran!",
   database: "bamazon"
 });
 
 // connect to the mysql server and sql database
 connection.connect(function(err) {
   if (err) throw err;
-  // run the start function after the connection
-  start();
+  // run the runCustomerView function after the connection
+  runCustomerView();
 });
 
-function start() {
-    connection.query("SELECT item_id, product_name, price FROM products", function(err, inventory) {
+function runCustomerView() {
+  clear();
+    connection.query("SELECT item_id, product_name, department_name, price FROM products", function(err, inventory) {
         if (err) throw err;
+
+        let table = new Table({
+            head: ['Item ID', 'Product', 'Department', 'Price'],
+            colWidths: [10, 68, 16, 10],
+            })
+
         for (let i = 0; i < inventory.length; i++) {
-            console.log(inventory[i].item_id + " | " + inventory[i].product_name + " | " + "$" + inventory[i].price);
-            console.log("-----------------------------------");
-          };    
+            table.push([inventory[i].item_id, inventory[i].product_name, inventory[i].department_name, "$" + inventory[i].price]);
+          }
+          console.log(`\n${table.toString()}\n\n`);   
+
           inquirer
             .prompt([
               {
@@ -98,9 +109,9 @@ function shopAgainPrompt() {
       choices: ["YES", "NO"]
       })
       .then(function(answer) {
-      // based on their answer, either call the start() or connection.end()
+      // based on their answer, either call the runCustomerView() or connection.end()
         if (answer.shopAgain === "YES") {
-          start();
+          runCustomerView();
         }
         else {
           connection.end();
