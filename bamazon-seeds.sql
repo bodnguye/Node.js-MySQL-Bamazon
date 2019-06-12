@@ -9,3 +9,15 @@ VALUES ("12 pairs of crew socks", "Clothing", 13.99, 50),
 		("103 Amazing Facts About the Black Indian of the Western Hemisphere", "Books", 250000.00, 1),
 		("Steam Iron", "Home & Kitchen", 23.97, 123),
 		("Dog Back Seat Cover", "Pets", 29.96, 78);
+
+INSERT INTO departments (department_name, over_head_cost)
+VALUES ("CLothing", 400),
+        ("Electronics", 350),
+        ("Bath", 100),
+        ("Board Games", 58),
+        ("Cleaning", 39),
+        ("Gaming", 3125),
+        ("Books", 250400),
+        ("Home & Kitchen", 765),
+        ("Pets", 543);
+
