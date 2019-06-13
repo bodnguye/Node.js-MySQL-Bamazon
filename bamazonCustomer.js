@@ -15,7 +15,8 @@ const connection = mysql.createConnection({
   user: "root",
 
   // password
-  password: "Passw0rd",
+  // password: "Passw0rd",
+  password: "Dai916Tran!",
   database: "bamazon"
 });
 
@@ -67,10 +68,12 @@ function runCustomerView() {
               }
           ])
           .then(function(answer) {
+            clear();
             let query = "SELECT * FROM products WHERE ?";
             connection.query(query, { item_id: answer.selectedId }, function(err, selectedItem) {
               if (err) throw err;
 
+              // Update the stock_quantity
               if (parseInt(selectedItem[0].stock_quantity) - parseInt(answer.selectedQuantity) >= 0) {
                 connection.query(
                   "UPDATE products SET ? WHERE ?",
@@ -86,7 +89,7 @@ function runCustomerView() {
                 function(error) {
                   if (error) throw err;
                   console.log(`Your total will be $${parseInt(answer.selectedQuantity) * parseFloat(selectedItem[0].price).toFixed(2)}. \nThank you for shopping at Bamazon!`);
-                  shopAgainPrompt();
+                  
                 }
                 );
               }
@@ -94,6 +97,25 @@ function runCustomerView() {
                 console.log("Sorry, Insufficient quantity!");
                 shopAgainPrompt();
               }
+
+                // Update the product_sales
+                connection.query(
+                  "UPDATE products SET ? WHERE ?",
+                  [
+                    {
+                      product_sales: parseInt(answer.selectedQuantity) * parseFloat(selectedItem[0].price).toFixed(2)
+                    },
+                    {
+                      item_id: answer.selectedId
+                    }
+                  ],
+
+                function(error) {
+                  if (error) throw err;
+                  console.log(`Your payment has been processed!`);
+                  shopAgainPrompt();
+                }
+                );
                 })
             });
       });
