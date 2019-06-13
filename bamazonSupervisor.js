@@ -60,6 +60,9 @@ clear();
     });
 }
 
+  /********************************/
+ /* viewDepartmentSales Function */
+/********************************/
 function viewDepartmentSales() {
     connection.query("SELECT * FROM departments", function(err, res) {
         if (err) throw err;

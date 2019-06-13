@@ -15,7 +15,8 @@ const connection = mysql.createConnection({
   user: "root",
 
   // password
-  password: "Passw0rd",
+  // password: "Passw0rd",
+  password: "Dai916Tran!",
   database: "bamazon"
 });
 
@@ -71,15 +72,16 @@ function runCustomerView() {
             let query = "SELECT * FROM products WHERE ?";
             connection.query(query, { item_id: answer.selectedId }, function(err, selectedItem) {
               if (err) throw err;
+              let stock_remaining = parseInt(selectedItem[0].stock_quantity) - parseInt(answer.selectedQuantity);
               let total_price = parseInt(answer.selectedQuantity) * parseFloat(selectedItem[0].price).toFixed(2);
 
               // Update the stock_quantity
-              if (parseInt(selectedItem[0].stock_quantity) - parseInt(answer.selectedQuantity) >= 0) {
+              if ( stock_remaining >= 0) {
                 connection.query(
                   "UPDATE products SET ? WHERE ?",
                   [
                     {
-                      stock_quantity: parseInt(selectedItem[0].stock_quantity) - parseInt(answer.selectedQuantity)
+                      stock_quantity: stock_remaining
                     },
                     {
                       item_id: answer.selectedId
