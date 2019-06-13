@@ -80,6 +80,48 @@ function viewDepartmentSales() {
         mainMenuPrompt();
 };
 
+  /********************************/
+ /* createNewDepartment Function */
+/********************************/
+function createNewDepartment() {
+      inquirer
+        .prompt([
+              {
+                name: "department",
+                type: "input",
+                message: "Department Name: ",
+              },
+              {
+                name: "overheadcost",
+                type: "input",
+                message: "Over Head Cost: ",
+                validate: function(value) {
+                  if (isNaN(value) === false) {
+                    return true;
+                  }
+                    return false;
+                  }
+              }
+          ])
+          .then(function(answer) {
+            console.log("Inserting a new department...\n");
+            let query = connection.query(
+            "INSERT INTO departments SET ?",
+            {
+                department_name: answer.department,
+                over_head_cost: answer.overheadcost
+            },
+            function(err, res) {
+                if (err) throw err;
+                    console.log(res.affectedRows + " department inserted!\n");
+                    }
+                );
+            // logs the actual query being run
+            console.log(query.sql);
+            mainMenuPrompt();
+            });
+}
+
   /***************************/
  /* mainMenuPrompt Function */
 /***************************/
