@@ -71,6 +71,7 @@ function runCustomerView() {
             let query = "SELECT * FROM products WHERE ?";
             connection.query(query, { item_id: answer.selectedId }, function(err, selectedItem) {
               if (err) throw err;
+              let total_price = parseInt(answer.selectedQuantity) * parseFloat(selectedItem[0].price).toFixed(2);
 
               // Update the stock_quantity
               if (parseInt(selectedItem[0].stock_quantity) - parseInt(answer.selectedQuantity) >= 0) {
@@ -87,7 +88,7 @@ function runCustomerView() {
 
                 function(error) {
                   if (error) throw err;
-                  console.log(`Your total will be $${parseInt(answer.selectedQuantity) * parseFloat(selectedItem[0].price).toFixed(2)}. \nThank you for shopping at Bamazon!`);
+                  console.log(`\nYour total will be $${total_price.toFixed(2)}. \nThank you for shopping at Bamazon!`);
                   
                 }
                 );
@@ -102,7 +103,7 @@ function runCustomerView() {
                   "UPDATE products SET ? WHERE ?",
                   [
                     {
-                      product_sales: parseInt(answer.selectedQuantity) * parseFloat(selectedItem[0].price).toFixed(2)
+                      product_sales: selectedItem[0].product_sales + total_price
                     },
                     {
                       item_id: answer.selectedId

@@ -27,9 +27,9 @@ connection.connect(function(err) {
   runSupervisorView();
 });
 
-/****************************/
+  /******************************/
  /* runSupervisorView Function */
-/**************************/
+/******************************/
 function runSupervisorView() {
 clear();
   inquirer
