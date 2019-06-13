@@ -64,16 +64,23 @@ clear();
  /* viewDepartmentSales Function */
 /********************************/
 function viewDepartmentSales() {
-    connection.query("SELECT * FROM departments", function(err, res) {
+    let query = "SELECT department_id, d.department_name, over_head_cost,"
+		+ " SUM(product_sales) AS product_sales," 
+		+ " SUM(product_sales) - over_head_cost AS total_profit ";
+	query += "FROM departments d INNER JOIN products p ";
+	query += "ON d.department_name = p.department_name ";
+	query += "GROUP BY department_id ";
+
+    connection.query(query, function(err, res) {
         if (err) throw err;
 
         let table = new Table({
-            head: ['Department ID', 'Department', 'Over Head Cost'],
-            colWidths: [15, 16, 16],
+            head: ['Department ID', 'Department', 'Over Head Cost', 'Product Sales', 'Total Profit'],
+            colWidths: [15, 16, 16, 16, 16],
         })
 
         for (let i = 0; i < res.length; i++) {
-            table.push([res[i].department_id, res[i].department_name, "$" + res[i].over_head_cost]);
+            table.push([res[i].department_id, res[i].department_name, "$" + res[i].over_head_cost, "$" + res[i].product_sales, "$" + res[i].total_profit]);
           }
         console.log(`\n${table.toString()}\n\n`);
         })
