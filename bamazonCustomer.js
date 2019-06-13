@@ -15,8 +15,7 @@ const connection = mysql.createConnection({
   user: "root",
 
   // password
-  // password: "Passw0rd",
-  password: "Dai916Tran!",
+  password: "Passw0rd",
   database: "bamazon"
 });
 
@@ -72,7 +71,7 @@ function runCustomerView() {
             let query = "SELECT * FROM products WHERE ?";
             connection.query(query, { item_id: answer.selectedId }, function(err, selectedItem) {
               if (err) throw err;
-              
+
               let stock_remaining = parseInt(selectedItem[0].stock_quantity) - parseInt(answer.selectedQuantity);
               let total_price = parseInt(answer.selectedQuantity) * parseFloat(selectedItem[0].price).toFixed(2);
 
