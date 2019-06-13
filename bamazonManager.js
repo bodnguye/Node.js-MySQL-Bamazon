@@ -35,7 +35,7 @@ clear();
     .prompt({
       name: "action",
       type: "list",
-      message: "What would you like to do?",
+      message: "Welcome Manager, what would you like to do?",
       choices: [
         "View Products for Sale",
         "View Low Inventory",
