@@ -26,9 +26,9 @@ connection.connect(function(err) {
   runManagerView();
 });
 
-  /****************************/
+  /***************************/
  /* runManagerView Function */
-/**************************/
+/***************************/
 function runManagerView() {
 clear();
   inquirer

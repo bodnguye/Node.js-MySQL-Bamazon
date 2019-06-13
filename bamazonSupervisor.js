@@ -59,3 +59,42 @@ clear();
       }
     });
 }
+
+function viewDepartmentSales() {
+    connection.query("SELECT * FROM departments", function(err, res) {
+        if (err) throw err;
+
+        let table = new Table({
+            head: ['Department ID', 'Department', 'Over Head Cost'],
+            colWidths: [15, 16, 16],
+        })
+
+        for (let i = 0; i < res.length; i++) {
+            table.push([res[i].department_id, res[i].department_name, "$" + res[i].over_head_cost]);
+          }
+        console.log(`\n${table.toString()}\n\n`);
+        })
+        mainMenuPrompt();
+};
+
+  /***************************/
+ /* mainMenuPrompt Function */
+/***************************/
+function mainMenuPrompt() {
+  inquirer
+    .prompt({
+      name: "mainMenu",
+      type: "list",
+      message: "Main menu or Exit?",
+      choices: ["Main Menu", "Exit"]
+      })
+      .then(function(answer) {
+      // based on their answer, either call the runManagerView() or connection.end()
+        if (answer.mainMenu === "Main Menu") {
+          runSupervisorView();
+        }
+        else {
+          connection.end();
+        }
+        });
+};
