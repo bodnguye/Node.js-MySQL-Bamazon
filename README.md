@@ -22,7 +22,7 @@ An Amazon-like CLI storefront built with mySQL, NODE.js and Inquirer NPM. The ap
 5. Run the following Commands.
 6. Get results
 
-     **Use-Case 1**: Run the `bamazonCustomer.js` file
+    **Use-Case 1**: Run the `bamazonCustomer.js` file
     
         node bamazonCustomer.js
 
@@ -34,21 +34,73 @@ An Amazon-like CLI storefront built with mySQL, NODE.js and Inquirer NPM. The ap
 
     **Enter a item_id and quantity**:
         
-        - If the quantity demanded is more than the quantity supplied this response will be shown.
+    - If the quantity demanded is more than the quantity supplied this response will be shown.
 
     See screenshot:
 
     ![Results](/screenshots/insufficient.png)
 
-        - If the purchase goes through, it updates the stock quantity to reflect the purchase and show total price amount.
+    - If the purchase goes through: it updates the stock quantity to reflect the purchase
+    - calculate and updates the price_sales
+    - calculate and show total price amount.
 
     See screenshot:
 
     ![Results](/screenshots/sufficient.png)
 
+    **Use-Case 2**: Run the `bamazonManager.js` file
+    
+        node bamazonManager.js
+
+   Output: Bamazon will display a list of options in the Manager View.
+
+   See screenshot: 
+
+   ![Results](/screenshots/managerview.png)
+
+    **View Products For Sale**:
+
+    - Selecting the `View Product For Sale` will create a table with item_id,product, department, price, and stock quantity columns.
+
+    See screenshot:
+
+    ![Results](/screenshots/viewProd4sale.png)
+
+    **View Low Inventory**:
+
+    - Selecting the `View Low Inventory` option will give you a table of products with a stock quantity less than 5.
+
+    See screenshot: 
+
+    ![Results](/screenshots/lowInv.png)
+
+    **Add To Inventory**:
+
+    - Selecting the `Add to Inventory` option will give you the table of all the products and prompt you
+    `Which item would you like to add more inventory? (Enter the item_id)`
+    `What is the quantity would you like to add?`.
+    - You may comfirm by selecting the `View Product For Sale` option. 
+
+    See screenshot:
+
+    ![Results](/screenshots/add2Inv.png)
+
+    **Add New Product**:
+
+    - Selecting the `Add New Product` option will prompt you for the Product Name, Department, price, and stock Quantity.
+
+    See screenchot:
+
+    ![Results](/screenshots/AddNewProd.png)
 
 
-         
+
+
+
+    
+
+
+
 
 
 
