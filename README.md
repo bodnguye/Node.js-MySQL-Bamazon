@@ -92,6 +92,7 @@ An Amazon-like CLI storefront built with mySQL, NODE.js and Inquirer NPM. The ap
     See screenchot:
 
     ![Results](/screenshots/AddNewProd.png)
+    ![Results](/screenshots/viewNewProd.png)
 
     **Use-Case 3**: Run the `bamazonSupervisor.js` file
     
@@ -118,6 +119,8 @@ An Amazon-like CLI storefront built with mySQL, NODE.js and Inquirer NPM. The ap
    See screenshot: 
 
    ![Results](/screenshots/newDep.png)
+
+   ![Results](/screenshots/newDepTable.png)
 
 
 
