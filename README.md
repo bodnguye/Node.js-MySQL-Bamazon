@@ -77,8 +77,8 @@ An Amazon-like CLI storefront built with mySQL, NODE.js and Inquirer NPM. The ap
     **Add To Inventory**:
 
     - Selecting the `Add to Inventory` option will give you the table of all the products and prompt you
-    `Which item would you like to add more inventory? (Enter the item_id)`
-    `What is the quantity would you like to add?`.
+        - `Which item would you like to add more inventory? (Enter the item_id)`
+        - `What is the quantity would you like to add?`.
     - You may comfirm by selecting the `View Product For Sale` option. 
 
     See screenshot:
@@ -92,6 +92,32 @@ An Amazon-like CLI storefront built with mySQL, NODE.js and Inquirer NPM. The ap
     See screenchot:
 
     ![Results](/screenshots/AddNewProd.png)
+
+    **Use-Case 3**: Run the `bamazonSupervisor.js` file
+    
+        node bamazonSupervisor.js
+
+   Output: Bamazon will display a list of options in the Supervisor View.
+
+   See screenshot: 
+
+   ![Results](/screenshots/SupView.png)
+
+   **View Product Sales by Department**:
+
+   - Selecting the `View Product Sales by Department` option will give you the table with Department ID, Department, Over Head Cost, Product Sales, Total Profit columns.
+
+   See screenshot: 
+
+   ![Results](/screenshots/salesbyDep.png)
+
+   **Create New Department**:
+
+   - Selecting the `Create New Department` option will prompt you for Department Name and Over Head Cost. It will then insert the new data into the departments table.
+
+   See screenshot: 
+
+   ![Results](/screenshots/newDep.png)
 
 
 

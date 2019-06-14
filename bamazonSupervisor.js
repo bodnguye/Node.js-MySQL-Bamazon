@@ -15,14 +15,15 @@ const connection = mysql.createConnection({
   user: "root",
 
   // password
-  password: "Passw0rd",
+  // password: "Passw0rd",
+  password: "Dai916Tran!",
   database: "bamazon"
 });
 
 // connect to the mysql server and sql database
 connection.connect(function(err) {
   if (err) throw err;
-  // run the runCustomerView function after the connection
+  // run the runSupervisorView function after the connection
   runSupervisorView();
 });
 
