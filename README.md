@@ -17,7 +17,8 @@ An Amazon-like CLI storefront built with mySQL, NODE.js and Inquirer NPM. The ap
 
 ## Instruction Guide
 1. Open terminal.
-3. Navigate to the `Node.js-MYSQL-Bamazon` folder that contains the `bamazonCustomer.js` file. 
+2. Navigate to the `Node.js-MYSQL-Bamazon` folder that contains the `bamazonCustomer.js` file. 
+3. Run `npm install`.
 4. Create the database and table using the `Bamazon-schema.sql` and `bamazaon-seeds.sql` file.
 5. Run the following Commands.
 6. Get results
